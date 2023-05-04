@@ -20,10 +20,12 @@
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Command" Value="{Binding InputCharacterCommand}"/>
                 <Setter Property="CommandParameter" Value="{Binding Content ,RelativeSource={RelativeSource Mode=Self}}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="WhiteSmoke"/>
             </Style>
             <Style TargetType="TextBox">
-                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontFamily" Value="ComicSans"/>
@@ -35,11 +37,15 @@
                 <Setter Property="FontFamily" Value="ComicSans"/>
                 <Setter Property="FontSize" Value="20"/>
             </Style>
+            <Style TargetType="GridSplitter">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Background" Value="WhiteSmoke"/>
+            </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="100"/>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="3"/>
             <RowDefinition MinHeight="100"/>
         </Grid.RowDefinitions>
 
@@ -56,7 +62,7 @@
                        Text="{Binding OutputText}"/>
         </Grid>
 
-        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5"/>
+        <GridSplitter Grid.Row="1" Height="3"/>
 
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -115,7 +121,7 @@
                 <Button Grid.Column="1" 
                         Content=")"/>
             </Grid>
-            
+
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     Content="0"/>
             <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1"
