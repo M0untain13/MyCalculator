@@ -18,6 +18,8 @@
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="FontFamily" Value="ComicSans"/>
                 <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Command" Value="{Binding InputCharacterCommand}"/>
+                <Setter Property="CommandParameter" Value="{Binding Content ,RelativeSource={RelativeSource Mode=Self}}"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="BorderThickness" Value="0"/>
@@ -28,6 +30,8 @@
                 <Setter Property="FontSize" Value="20"/>
             </Style>
             <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
                 <Setter Property="FontFamily" Value="ComicSans"/>
                 <Setter Property="FontSize" Value="20"/>
             </Style>
@@ -38,15 +42,18 @@
             <RowDefinition Height="5"/>
             <RowDefinition MinHeight="100"/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="50" Width="3*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition MinWidth="50" Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0"/>
+            <TextBox Grid.Column="0"
+                     Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5"/>
-            <TextBlock Grid.Column="2"/>
+            <TextBlock Grid.Column="2"
+                       Text="{Binding OutputText}"/>
         </Grid>
 
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5"/>
@@ -118,11 +125,15 @@
             <Button Grid.Row="0" Grid.Column="2"
                     Content="*"/>
             <Button Grid.Row="0" Grid.Column="3"
+                    Content="DEL"
+                    Command="{Binding InputDelCommand}" CommandParameter="{x:Null}"/>
+            <Button Grid.Row="1" Grid.Column="3"
                     Content="-"/>
-            <Button Grid.Row="1" Grid.Column="3" Grid.RowSpan="2"
+            <Button Grid.Row="2" Grid.Column="3"
                     Content="+"/>
             <Button Grid.Row="3" Grid.Column="3" Grid.RowSpan="2"
-                    Content="="/>
+                    Content="="
+                    Command="{x:Null}" CommandParameter="{x:Null}"/>
         </Grid>
     </Grid>
 
