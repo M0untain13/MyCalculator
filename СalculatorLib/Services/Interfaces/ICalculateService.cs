@@ -4,5 +4,6 @@
     {
         string InputText { get; set; }
         string OutputText { get; }
+        string GetMessageAboutError();
     }
 }

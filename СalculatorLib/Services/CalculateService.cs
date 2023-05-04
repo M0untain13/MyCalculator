@@ -1,9 +1,15 @@
-﻿using СalculatorLib.Services.Interfaces;
+﻿using System.Globalization;
+using org.mariuszgromada.math.mxparser;
+using СalculatorLib.Services.Interfaces;
 
 namespace СalculatorLib.Services
 {
     public class CalculateService : ICalculateService
     {
+        private Expression _expression = new("");
+
+        private readonly LibreTranslate.Net.LibreTranslate _libreTranslate = new();
+
         private string _inputText;
         public string InputText
         {
@@ -20,8 +26,17 @@ namespace СalculatorLib.Services
 
         private string Calculate(string value)
         {
-            //TODO: здесь нужно описать логику вычисления
-            return value;
+            _expression = new Expression(value);
+            if (_expression.checkSyntax())
+                return _expression.calculate().ToString(CultureInfo.CurrentCulture);
+            return "Ошибка";
         }
+
+        public string GetMessageAboutError()
+        { 
+            return _expression.getErrorMessage();
+        }
+
+        // private async Task<string> GetTranslateTask() 
     }
 }

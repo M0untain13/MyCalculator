@@ -12,10 +12,9 @@ namespace СalculatorLib.ViewModels.Pages
 
         #endregion
 
-
         #region Поля ввод/вывод
 
-        private string _inputText = "input";
+        private string _inputText = "2 + 2 * 2";
         public string InputText
         {
             get => _inputText;
@@ -25,11 +24,14 @@ namespace СalculatorLib.ViewModels.Pages
                 {
                     _calculateService.InputText = _inputText;
                     RaisePropertyChanged(nameof(OutputText));
+                    RaisePropertyChanged(nameof(OutputTip));
                 }
             }
         }
 
         public string OutputText => _calculateService.OutputText;
+
+        public string OutputTip => _calculateService.GetMessageAboutError();
 
         #endregion
 
@@ -46,6 +48,7 @@ namespace СalculatorLib.ViewModels.Pages
             #region Заполнение сервисов
 
             _calculateService = calculateService;
+            _calculateService.InputText = _inputText;
 
             #endregion
 
@@ -56,7 +59,7 @@ namespace СalculatorLib.ViewModels.Pages
             );
 
             InputDelCommand = new MvxCommand(
-                () => InputText = InputText.Substring(0, InputText.Length-1),
+                () => InputText = string.Empty,
                 () => InputText.Length > 0
             );
 

@@ -59,7 +59,8 @@
                      Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5"/>
             <TextBlock Grid.Column="2"
-                       Text="{Binding OutputText}"/>
+                       Text="{Binding OutputText}"
+                       ToolTip="{Binding OutputTip}"/>
         </Grid>
 
         <GridSplitter Grid.Row="1" Height="3"/>
