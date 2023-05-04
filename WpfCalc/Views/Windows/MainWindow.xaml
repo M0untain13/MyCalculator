@@ -8,10 +8,6 @@
     xmlns:l="clr-namespace:WpfCalc.Views.Windows"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
 
-    Title="MainWindow" Height="450" Width="800">
-
-    <Grid>
-        
-    </Grid>
+    Title="Мой калькулятор" Height="500" Width="400">
 
 </views:MvxWindow>
