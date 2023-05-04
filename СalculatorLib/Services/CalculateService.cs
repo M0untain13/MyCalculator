@@ -8,8 +8,6 @@ namespace СalculatorLib.Services
     {
         private Expression _expression = new("");
 
-        private readonly LibreTranslate.Net.LibreTranslate _libreTranslate = new();
-
         private string _inputText;
         public string InputText
         {
