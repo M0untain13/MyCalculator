@@ -34,7 +34,5 @@ namespace СalculatorLib.Services
         { 
             return _expression.getErrorMessage();
         }
-
-        // private async Task<string> GetTranslateTask() 
     }
 }
