@@ -7,7 +7,9 @@
 
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
     xmlns:l="clr-namespace:WpfCalc.Views.Pages"
+    xmlns:vm="clr-namespace:СalculatorLib.ViewModels.Pages;assembly=СalculatorLib"
     
+    d:DataContext="{d:DesignInstance vm:HomeViewModel}"
     d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>

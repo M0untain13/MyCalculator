@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
-using СalculatorLib.ViewModels;
+using СalculatorLib.ViewModels.Pages;
 
 namespace WpfCalc.Views.Pages
 {
