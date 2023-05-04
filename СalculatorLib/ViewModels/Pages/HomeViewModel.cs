@@ -1,10 +1,17 @@
 ﻿using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using СalculatorLib.Services.Interfaces;
 
 namespace СalculatorLib.ViewModels.Pages
 {
     public class HomeViewModel : MvxViewModel
     {
+        #region Сервисы
+
+        private readonly ICalculateService _calculateService;
+
+        #endregion
+
 
         #region Поля ввод/вывод
 
@@ -12,15 +19,17 @@ namespace СalculatorLib.ViewModels.Pages
         public string InputText
         {
             get => _inputText;
-            set => SetProperty(ref _inputText, value);
+            set
+            {
+                if (SetProperty(ref _inputText, value))
+                {
+                    _calculateService.InputText = _inputText;
+                    RaisePropertyChanged(nameof(OutputText));
+                }
+            }
         }
 
-        private string _outputText = "output";
-        public string OutputText
-        {
-            get => _outputText;
-            set => SetProperty(ref _outputText, value);
-        }
+        public string OutputText => _calculateService.OutputText;
 
         #endregion
 
@@ -32,8 +41,14 @@ namespace СalculatorLib.ViewModels.Pages
 
         #endregion
 
-        public HomeViewModel()
+        public HomeViewModel(ICalculateService calculateService)
         {
+            #region Заполнение сервисов
+
+            _calculateService = calculateService;
+
+            #endregion
+
             #region Заполнение команд
 
             InputCharacterCommand = new MvxCommand<char>(
