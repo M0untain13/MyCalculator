@@ -6,6 +6,11 @@ namespace СalculatorLib.Services
 {
     public class CalculateService : ICalculateService
     {
+        static CalculateService()
+        {
+            License.iConfirmNonCommercialUse("");
+        }
+
         private Expression _expression = new("");
 
         private string _inputText;

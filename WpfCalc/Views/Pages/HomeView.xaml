@@ -8,18 +8,16 @@
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
     xmlns:l="clr-namespace:WpfCalc.Views.Pages"
     xmlns:vm="clr-namespace:СalculatorLib.ViewModels.Pages;assembly=СalculatorLib"
-    
+
     d:DataContext="{d:DesignInstance vm:HomeViewModel}"
     d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>
         <Grid.Resources>
-            <Style TargetType="Button">
+            <Style TargetType="Button" x:Key="BaseButtonStyle">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="FontFamily" Value="ComicSans"/>
                 <Setter Property="FontSize" Value="20"/>
-                <Setter Property="Command" Value="{Binding InputCharacterCommand}"/>
-                <Setter Property="CommandParameter" Value="{Binding Content ,RelativeSource={RelativeSource Mode=Self}}"/>
                 <Setter Property="BorderThickness" Value="2"/>
                 <Setter Property="BorderBrush" Value="WhiteSmoke"/>
             </Style>
@@ -41,6 +39,15 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Background" Value="WhiteSmoke"/>
             </Style>
+            <Style TargetType="TabControl">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="ComicSans"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -56,7 +63,8 @@
                 <ColumnDefinition MinWidth="50" Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
-                     Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     PreviewMouseLeftButtonUp="TextBox_MouseLeftButtonUp"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5"/>
             <TextBlock Grid.Column="2"
                        Text="{Binding OutputText}"
@@ -65,83 +73,126 @@
 
         <GridSplitter Grid.Row="1" Height="3"/>
 
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="2" TabStripPlacement="Left">
+            <TabItem Header="Base">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                            <Setter Property="Command" Value="{Binding InputCharacterCommand}"/>
+                            <Setter Property="CommandParameter" Value="{Binding Content ,RelativeSource={RelativeSource Mode=Self}}"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1" Grid.Column="0" 
-                  Grid.RowSpan="3" Grid.ColumnSpan="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0"
+                    <Grid Grid.Row="1" Grid.Column="0" 
+                          Grid.RowSpan="3" Grid.ColumnSpan="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0"
                         Content="1"/>
-                <Button Grid.Row="0" Grid.Column="1"
+                        <Button Grid.Row="0" Grid.Column="1"
                         Content="2"/>
-                <Button Grid.Row="0" Grid.Column="2"
+                        <Button Grid.Row="0" Grid.Column="2"
                         Content="3"/>
-                <Button Grid.Row="1" Grid.Column="0"
+                        <Button Grid.Row="1" Grid.Column="0"
                         Content="4"/>
-                <Button Grid.Row="1" Grid.Column="1"
+                        <Button Grid.Row="1" Grid.Column="1"
                         Content="5"/>
-                <Button Grid.Row="1" Grid.Column="2"
+                        <Button Grid.Row="1" Grid.Column="2"
                         Content="6"/>
-                <Button Grid.Row="2" Grid.Column="0"
+                        <Button Grid.Row="2" Grid.Column="0"
                         Content="7"/>
-                <Button Grid.Row="2" Grid.Column="1"
+                        <Button Grid.Row="2" Grid.Column="1"
                         Content="8"/>
-                <Button Grid.Row="2" Grid.Column="2"
+                        <Button Grid.Row="2" Grid.Column="2"
                         Content="9"/>
-            </Grid>
+                    </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" 
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" 
                         Content="("/>
-                <Button Grid.Column="1" 
+                        <Button Grid.Column="1" 
                         Content=")"/>
-            </Grid>
+                    </Grid>
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     Content="0"/>
-            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1"
+                    <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1"
                     Content="."/>
-            <Button Grid.Row="0" Grid.Column="1"
+                    <Button Grid.Row="0" Grid.Column="1"
                     Content="/"/>
-            <Button Grid.Row="0" Grid.Column="2"
+                    <Button Grid.Row="0" Grid.Column="2"
                     Content="*"/>
-            <Button Grid.Row="0" Grid.Column="3"
-                    Content="DEL"
-                    Command="{Binding InputDelCommand}" CommandParameter="{x:Null}"/>
-            <Button Grid.Row="1" Grid.Column="3"
-                    Content="-"/>
-            <Button Grid.Row="2" Grid.Column="3"
-                    Content="+"/>
-            <Button Grid.Row="3" Grid.Column="3" Grid.RowSpan="2"
-                    Content="="
-                    Command="{x:Null}" CommandParameter="{x:Null}"/>
-        </Grid>
+                    <Button Grid.Row="4" Grid.Column="3"
+                            Content="Del"
+                            Command="{Binding InputDelCommand}" CommandParameter="{x:Null}"/>
+                    <Button Grid.Row="3" Grid.Column="3"
+                            Content="Back"
+                            Command="{Binding InputBackCommand}" CommandParameter="{x:Null}"/>
+                    <Button Grid.Row="0" Grid.Column="3"
+                            Content="-"/>
+                    <Button Grid.Row="1" Grid.Column="3"
+                            Content="+"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Trig">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                            <Setter Property="Command" Value="{Binding InputTrigCommand}"/>
+                            <Setter Property="CommandParameter" Value="{Binding Content ,RelativeSource={RelativeSource Mode=Self}}"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0"
+                            Content="sin"/>
+                    <Button Grid.Row="1" Grid.Column="0"
+                            Content="cos"/>
+                    <Button Grid.Row="2" Grid.Column="0"
+                            Content="tan"/>
+                    <Button Grid.Row="3" Grid.Column="0"
+                            Content="cot"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        
     </Grid>
 
 </views:MvxWpfView>
