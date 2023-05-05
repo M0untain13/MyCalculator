@@ -21,7 +21,7 @@ namespace СalculatorLib.ViewModels.Pages
 
         #region Выделенный текст
 
-        private int _selStartInd;
+        private int _selStartInd = _START_TEXT.Length;
         public int SelStartInd
         {
             get => _selStartInd;
@@ -37,9 +37,9 @@ namespace СalculatorLib.ViewModels.Pages
 
         #endregion
 
+        private const string _START_TEXT = "2 + 2 * 2";
 
-
-        private string _inputText = "2 + 2 * 2";
+        private string _inputText = _START_TEXT;
         public string InputText
         {
             get => _inputText;
@@ -135,7 +135,6 @@ namespace СalculatorLib.ViewModels.Pages
                         var len = SelLen;
                         InputText = InputText.Insert(startInd + len, $"){p}");
                         InputText = InputText.Insert(startInd, "(");
-
                     }
                 }
             );
