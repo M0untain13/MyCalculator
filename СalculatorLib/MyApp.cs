@@ -1,19 +1,19 @@
 ﻿using MvvmCross.IoC;
 using MvvmCross.ViewModels;
-using СalculatorLib.ViewModels;
+using СalculatorLib.ViewModels.Pages;
 
 namespace СalculatorLib
 {
-public class MyApp : MvxApplication
-{
-    public override void Initialize()
+    public class MyApp : MvxApplication
     {
-        CreatableTypes()
-            .EndingWith("Service")
-            .AsInterfaces()
-            .RegisterAsLazySingleton();
+        public override void Initialize()
+        {
+            CreatableTypes()
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
 
-        RegisterAppStart<HomeViewModel>();
+            RegisterAppStart<HomeViewModel>();
+        }
     }
-}
 }

@@ -8,7 +8,7 @@
     StartupUri="/Views/Windows/MainWindow.xaml">
 
     <Application.Resources>
-        
+
     </Application.Resources>
 
 </views:MvxApplication>
